@@ -1,4 +1,4 @@
-import { Suspense, lazy } from 'react';
+// import { Suspense, lazy } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import BlogCard from '../components/BlogCard';
 import { type Blog } from '../types';
@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 
 // const Navbar = lazy(() => import('../components/Navbar'));
 
-const BlogForm = lazy(() => import('../components/BlogForm'));
+// const BlogForm = lazy(() => import('../components/BlogForm'));
 
 /*************  ✨ Windsurf Command ⭐  *************/
 /**
@@ -19,17 +19,6 @@ const BlogForm = lazy(() => import('../components/BlogForm'));
   return res.json();
 };
 
-const createBlog = async (data: Partial<Blog>) => {
-  const res = await fetch(`${import.meta.env.VITE_API_URL}/blogs`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${localStorage.getItem('token')}`,
-    },
-    body: JSON.stringify(data),
-  });
-  return res.json();
-};
 
 const deleteBlog = async (id: string) => {
   await fetch(`${import.meta.env.VITE_API_URL}/blogs/${id}`, {

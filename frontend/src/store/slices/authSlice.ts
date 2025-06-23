@@ -5,6 +5,7 @@ interface AuthState {
   user: User | null;
   token: string | null;
 }
+export type { AuthState };
 
 const initialState: AuthState = {
   user: null,
