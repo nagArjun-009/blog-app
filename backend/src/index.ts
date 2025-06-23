@@ -8,7 +8,26 @@ import blogRoutes from './routes/blogRoutes';
 dotenv.config();
 const app = express();
 
-app.use(cors());
+// Define allowed origins
+const allowedOrigins = [
+  'http://localhost:5173', // Development frontend
+  'https://your-frontend.vercel.app', // Replace with your deployed frontend URL
+];
+
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      // Allow requests with no origin (e.g., server-to-server requests)
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error('Not allowed by CORS'));
+      }
+    },
+    credentials: true, // If you need to send cookies or auth headers
+  })
+);
+
 app.use(express.json());
 
 connectDB();
